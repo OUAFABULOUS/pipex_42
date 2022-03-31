@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:18:13 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/31 16:20:09 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/03/31 17:55:44 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,40 +141,33 @@ void	init_hd(t_pipex *p, char **av, int ac, char **env)
 	char	*ret;
 	int		count;
 	char	c;
+	int		pipe_test[2];
 
 	i = 0;
 	count = 0;
 	p->cmd_num = ac - 4;
 	printf("Number of commands: %d\n", p->cmd_num);
 	p->fd = malloc((p->cmd_num -1) * sizeof(int *));
-	while (i < p->cmd_num -1)
-	{
-		(p->fd)[i] = malloc(2 * sizeof(int));
-		if (pipe((p->fd)[i]) == -1)
-		{
-			handle_error("Pipe failed.\n");
-			free_fds(p, i);
-			exit(0);
-		}
-	i++;
-	}
 	get_cmdnargs(p, av, 1);
-	triple_ptr_print(p->cmdnargs);
 	get_cmds(p);
-	double_ptr_print(p->cmdn);
-	fd_tmp = open("./tmp", O_RDWR | O_CREAT | O_APPEND, 0644);
-		write(1, "here doc:", 9);
+	if (pipe(pipe_test) == -1)
+	{
+		printf("erreur ici : %s\n", strerror(errno));
+		exit(0);
+	}
+	write(1, "here doc:", 9);
 	ret = get_next_line(STDIN);
 	while (ret)
 	{
 		if (!ft_strncmp(ret, av[2], ft_strlen(av[2])))
 			break ;
-		write(fd_tmp, ret, ft_strlen(ret));
+		write(pipe_test[1], ret, ft_strlen(ret));
 		write(1, "here doc:", 9);
 		free(ret);
 		ret = get_next_line(STDIN);
 	}
-	while (read(fd_tmp, &c, 1))
+	close(pipe_test[1]);
+	while (read(pipe_test[0], &c, 1))
 		count++;
 	printf("le nombre de caracteres dans ton fichier tmp est: %d\n", count);
 //	dup2(p->fd_tm, STDIN);
@@ -190,7 +183,6 @@ void	init_hd(t_pipex *p, char **av, int ac, char **env)
 	double_ptr_print(p->cmdn_path);
 	*/
 }
-
 
 void	init(t_pipex *p, char **av, int ac, char **env)
 {
