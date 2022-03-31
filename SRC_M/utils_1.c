@@ -6,11 +6,11 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:16:15 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/24 21:36:31 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/03/31 20:01:39 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_m.h"
 
 int	ft_strlen(char *str)
 {

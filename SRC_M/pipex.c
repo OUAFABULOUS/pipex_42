@@ -6,12 +6,11 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 22:04:04 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/31 01:21:11 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/03/31 18:43:57 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
-#include <stdio.h>
+#include "../includes/pipex_m.h"
 
 int	main(int argc, char **argv, char **env)
 {

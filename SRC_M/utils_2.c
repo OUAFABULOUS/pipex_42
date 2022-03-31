@@ -6,12 +6,11 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:18:13 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/31 03:31:04 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/03/31 19:03:09 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
-#include <stdio.h>
+#include "../includes/pipex_m.h"
 
 void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path)
 {
@@ -41,8 +40,10 @@ void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path)
 
 void	get_cmds_path(t_pipex *p)
 {
-	get_cmd_path(p, p->cmd1, &(p->cmd1_path));
-	get_cmd_path(p, p->cmd2, &(p->cmd2_path));
+	if (p->cmd1)
+		get_cmd_path(p, p->cmd1, &(p->cmd1_path));
+	if (p->cmd2)
+		get_cmd_path(p, p->cmd2, &(p->cmd2_path));
 }
 
 void	handle_error(char *str)
@@ -54,21 +55,7 @@ void	handle_error(char *str)
 		len++;
 	write(1, str, len);
 }
-/*
-void	double_ptr_print(char **str)
-{
-int	i;
 
-i = 0;
-printf("\n");
-while(str[i])
-{
-	printf("%s\n", str[i]);
-	i++;
-}
-printf("\n");
-}
-*/
 void	init(t_pipex *p, char **av, char **env)
 {
 	if (pipe(p->fd) == -1)
@@ -84,20 +71,12 @@ void	init(t_pipex *p, char **av, char **env)
 		handle_error("Error while opening the infile.\n");
 	if (p->fd_out < 0)
 		handle_error("Error while opening the outfile.\n");
-	p->cmd1 = p->cmd1nargs[0];
-//	printf("Commande 1: %s\n", p->cmd1);
-	p->cmd2 = p->cmd2nargs[0];
-//	printf("Commande 2: %s\n", p->cmd2);
-	p->cmd1_args = p->cmd1nargs;
-//	double_ptr_print(p->cmd1nargs);
-	p->cmd2_args = p->cmd2nargs;
-//	double_ptr_print(p->cmd2nargs);
+	if (p->cmd1nargs)
+		p->cmd1 = p->cmd1nargs[0];
+	if (p->cmd2nargs)
+		p->cmd2 = p->cmd2nargs[0];
 	get_paths(p, env);
-//	printf("get_paths_done\n");
 	get_cmds_path(p);
-//	printf("get_cmds_path_done\n");
-//	printf("Path for the 1st cmd: %s\n", p->cmd1_path);
-//	printf("Path for the 1st cmd: %s\n", p->cmd2_path);
 }
 
 void	free_split(char **str)

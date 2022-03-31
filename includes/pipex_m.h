@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_m.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 21:15:41 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/31 01:21:52 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/03/31 19:13:16 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_M_H
+# define PIPEX_M_H
 
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -32,9 +32,7 @@ typedef struct s_pipex {
 	char	**cmd1nargs;
 	char	**cmd2nargs;
 	char	*cmd1;
-	char	**cmd1_args;
 	char	*cmd2;
-	char	**cmd2_args;
 	char	**paths;
 	char	*cmd1_path;
 	char	*cmd2_path;

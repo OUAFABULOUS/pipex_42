@@ -6,11 +6,25 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:19:14 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/31 09:26:41 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/03/31 19:27:29 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_m.h"
+
+void	fail(t_pipex *p, char c)
+{
+	if (c == 'p')
+		handle_error("Pipe failed.\n");
+	if (c == 'f')
+		handle_error("Fork failed.\n");
+	if (c == 'd')
+		handle_error("Dup failed.\n");
+	if (c == 'e')
+		handle_error("Execve failed.\n");
+	free_init(p);
+	exit(0);
+}
 
 void	free_init(t_pipex *p)
 {
@@ -24,12 +38,15 @@ void	free_init(t_pipex *p)
 void	ft_child_1(t_pipex *p, char **env)
 {
 	close(p->fd[0]);
-	dup2(p->fd[1], STDOUT);
+	if (dup2(p->fd[1], STDOUT) == -1)
+		fail(p, 'd');
 	close(p->fd[1]);
-	dup2(p->fd_in, STDIN);
+	if (dup2(p->fd_in, STDIN) == -1)
+		fail(p, 'd');
 	close(p->fd_in);
 	close(p->fd_out);
-	execve(p->cmd1_path, p->cmd1_args, env);
+	if (execve(p->cmd1_path, p->cmd1nargs, env) == -1)
+		fail(p, 'e');
 	exit(0);
 }
 
@@ -37,55 +54,37 @@ void	ft_child_2(t_pipex *p, char **env)
 {
 	close(p->fd_in);
 	close(p->fd[1]);
-	dup2(p->fd[0], STDIN);
+	if (dup2(p->fd[0], STDIN))
+		fail(p, 'd');
 	close(p->fd[0]);
-	dup2(p->fd_out, STDOUT);
+	if (dup2(p->fd_out, STDOUT))
+		fail(p, 'd');
 	close(p->fd_out);
-//	close(p->fd);
-	execve(p->cmd2_path, p->cmd2_args, env);
+	if (execve(p->cmd2_path, p->cmd2nargs, env) == -1)
+		fail(p, 'e');
 	exit(0);
 }
-/*
-void	ft_child_2(t_pipex *p, char **env)
-{
-	close(p->fd[1]);
-	dup2(p->fd[0], STDIN);
-	close(p->fd[0]);
-	dup2(p->fd_out, STDOUT);
-	close(p->fd_out);
-	execve(p->cmd2_path, p->cmd2_args, env);
-	exit(0);
-}
-*/
+
 void	ft_fork(t_pipex *p, char **env)
 {
 	int	pid1;
 	int	pid2;
-	int status;
+	int	status;
 
 	pid1 = fork();
 	if (pid1 == -1)
-	{
-		handle_error("Fork failed.\n");
-		free_init(p);
-		exit(0);
-	}
+		fail(p, 'p');
 	if (pid1 == 0)
 		ft_child_1(p, env);
-//	ft_parent(p, env);
 	pid2 = fork();
 	if (pid2 == -1)
-	{
-		handle_error("Fork failed.\n");
-		free_init(p);
-		exit(0);
-	}
+		fail(p, 'p');
 	if (pid2 == 0)
 		ft_child_2(p, env);
 	close (p->fd[0]);
 	close (p->fd[1]);
 	close (p->fd_in);
-	close (p->fd_in);
+	close (p->fd_out);
 	waitpid(pid1, &status, 0);
 	waitpid(pid2, &status, 0);
-	}
+}
