@@ -6,7 +6,7 @@
 #    By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/02 20:16:19 by omoudni           #+#    #+#              #
-#    Updated: 2022/03/31 10:20:36 by omoudni          ###   ########.fr        #
+#    Updated: 2022/03/31 16:17:32 by omoudni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,9 @@ SRCS = pipex.c \
 	   split.c \
 	   utils_1.c \
 	   utils_2.c \
-	   utils_3.c \
 	   gnl/get_next_line.c \
 	   gnl/get_next_line_utils.c
+#	   utils_3.c \
 
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:%.c=%.o))
 
@@ -52,7 +52,8 @@ PIPEX = pipex
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address
+#CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address
+CFLAGS = -g -fsanitize=address
 
 CPPFLAGS = -I$(INC_DIR)
 
@@ -65,7 +66,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(call compiling, $@, $<)
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR) $(OBJ_DIR)/gnl/
 
 clean:
 	$(call cleaning, $(OBJ_DIR))

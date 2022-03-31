@@ -6,11 +6,12 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:18:13 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/31 10:51:24 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/03/31 16:20:09 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
+#include "../includes/get_next_line.h"
 #include <stdio.h>
 
 void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path)
@@ -136,10 +137,13 @@ void	get_cmds(t_pipex *p)
 void	init_hd(t_pipex *p, char **av, int ac, char **env)
 {
 	int		i;
-	char	*infile;
+	int		fd_tmp;
+	char	*ret;
+	int		count;
+	char	c;
 
 	i = 0;
-	infile = malloc(BUFF * sizeof(char));
+	count = 0;
 	p->cmd_num = ac - 4;
 	printf("Number of commands: %d\n", p->cmd_num);
 	p->fd = malloc((p->cmd_num -1) * sizeof(int *));
@@ -158,10 +162,25 @@ void	init_hd(t_pipex *p, char **av, int ac, char **env)
 	triple_ptr_print(p->cmdnargs);
 	get_cmds(p);
 	double_ptr_print(p->cmdn);
-	p->fd_in = open(infile, O_RDWR | O_CREAT, 0644);
-	dup2(p->fd_in, STDIN);
-	close(p->fd_in);
-	p->fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	fd_tmp = open("./tmp", O_RDWR | O_CREAT | O_APPEND, 0644);
+		write(1, "here doc:", 9);
+	ret = get_next_line(STDIN);
+	while (ret)
+	{
+		if (!ft_strncmp(ret, av[2], ft_strlen(av[2])))
+			break ;
+		write(fd_tmp, ret, ft_strlen(ret));
+		write(1, "here doc:", 9);
+		free(ret);
+		ret = get_next_line(STDIN);
+	}
+	while (read(fd_tmp, &c, 1))
+		count++;
+	printf("le nombre de caracteres dans ton fichier tmp est: %d\n", count);
+//	dup2(p->fd_tm, STDIN);
+//	close(p->fd_in);
+/*
+ * p->fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (p->fd_in < 0)
 		handle_error("Error while opening the infile.\n");
 	if (p->fd_out < 0)
@@ -169,6 +188,7 @@ void	init_hd(t_pipex *p, char **av, int ac, char **env)
 	get_paths(p, env);
 	get_cmds_path(p);
 	double_ptr_print(p->cmdn_path);
+	*/
 }
 
 
