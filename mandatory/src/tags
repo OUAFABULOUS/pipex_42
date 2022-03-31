@@ -1,0 +1,25 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+free_init	utils_3.c	/^void	free_init(t_pipex *p)$/;"	f
+free_split	utils_2.c	/^void	free_split(char **str)$/;"	f
+ft_char_in_charset	split.c	/^static int	ft_char_in_charset(char *str, char c)$/;"	f	file:
+ft_child_1	utils_3.c	/^void	ft_child_1(t_pipex *p, char **env)$/;"	f
+ft_concat	utils_1.c	/^char	*ft_concat(char *str1, char c, char *str2)$/;"	f
+ft_fork	utils_3.c	/^void	ft_fork(t_pipex *p, char **env)$/;"	f
+ft_parent	utils_3.c	/^void	ft_parent(t_pipex *p, char **env)$/;"	f
+ft_split	split.c	/^char	**ft_split(char *str, char *charset)$/;"	f
+ft_strdup	utils_1.c	/^char	*ft_strdup(char *str)$/;"	f
+ft_strlen	utils_1.c	/^int	ft_strlen(char *str)$/;"	f
+ft_strncmp	utils_1.c	/^int	ft_strncmp(char *str1, char *str2, int n)$/;"	f
+ft_strncpy	split.c	/^static char	*ft_strncpy(char *dest, char *src, unsigned int n)$/;"	f	file:
+ft_word_count	split.c	/^static int	ft_word_count(char *str, char *charset)$/;"	f	file:
+get_cmd_path	utils_2.c	/^void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path)$/;"	f
+get_cmds_path	utils_2.c	/^void	get_cmds_path(t_pipex *p)$/;"	f
+get_paths	utils_1.c	/^void	get_paths(t_pipex *p, char **env)$/;"	f
+handle_error	utils_2.c	/^void	handle_error(char *str)$/;"	f
+init	utils_2.c	/^void	init(t_pipex *p, char **av, char **env)$/;"	f
+main	pipex.c	/^int	main(int argc, char **argv, char **env)$/;"	f
