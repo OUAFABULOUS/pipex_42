@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:19:14 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/31 19:27:29 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/03/31 22:06:35 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	fail(t_pipex *p, char c)
 		handle_error("Pipe failed.\n");
 	if (c == 'f')
 		handle_error("Fork failed.\n");
-	if (c == 'd')
-		handle_error("Dup failed.\n");
 	if (c == 'e')
 		handle_error("Execve failed.\n");
 	free_init(p);
@@ -38,15 +36,14 @@ void	free_init(t_pipex *p)
 void	ft_child_1(t_pipex *p, char **env)
 {
 	close(p->fd[0]);
-	if (dup2(p->fd[1], STDOUT) == -1)
-		fail(p, 'd');
+	dup2(p->fd[1], STDOUT);
 	close(p->fd[1]);
-	if (dup2(p->fd_in, STDIN) == -1)
-		fail(p, 'd');
+	dup2(p->fd_in, STDIN);
 	close(p->fd_in);
 	close(p->fd_out);
-	if (execve(p->cmd1_path, p->cmd1nargs, env) == -1)
-		fail(p, 'e');
+//	if (execve(p->cmd1_path, p->cmd1nargs, env) == -1)
+	execve(p->cmd1_path, p->cmd1nargs, env);
+//		fail(p, 'e');
 	exit(0);
 }
 
@@ -54,14 +51,12 @@ void	ft_child_2(t_pipex *p, char **env)
 {
 	close(p->fd_in);
 	close(p->fd[1]);
-	if (dup2(p->fd[0], STDIN))
-		fail(p, 'd');
+	dup2(p->fd[0], STDIN);
 	close(p->fd[0]);
-	if (dup2(p->fd_out, STDOUT))
-		fail(p, 'd');
+	dup2(p->fd_out, STDOUT);
 	close(p->fd_out);
-	if (execve(p->cmd2_path, p->cmd2nargs, env) == -1)
-		fail(p, 'e');
+	execve(p->cmd2_path, p->cmd2nargs, env);
+//		fail(p, 'e');
 	exit(0);
 }
 

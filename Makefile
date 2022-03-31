@@ -6,7 +6,7 @@
 #    By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/02 20:16:19 by omoudni           #+#    #+#              #
-#    Updated: 2022/03/31 19:59:27 by omoudni          ###   ########.fr        #
+#    Updated: 2022/03/31 21:46:42 by omoudni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,12 @@ PIPEX = pipex
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -g
+
+DEBUG =
+ifdef DEBUG
+CFLAGS += -fsanitize=address
+endif
 
 CPPFLAGS_M = -I$(INC_DIR_M)
 
