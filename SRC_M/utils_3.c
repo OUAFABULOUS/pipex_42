@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:19:14 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/31 22:06:35 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/01 18:45:21 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void	ft_child_1(t_pipex *p, char **env)
 	dup2(p->fd_in, STDIN);
 	close(p->fd_in);
 	close(p->fd_out);
-//	if (execve(p->cmd1_path, p->cmd1nargs, env) == -1)
 	execve(p->cmd1_path, p->cmd1nargs, env);
-//		fail(p, 'e');
 	exit(0);
 }
 
@@ -56,15 +54,15 @@ void	ft_child_2(t_pipex *p, char **env)
 	dup2(p->fd_out, STDOUT);
 	close(p->fd_out);
 	execve(p->cmd2_path, p->cmd2nargs, env);
-//		fail(p, 'e');
 	exit(0);
 }
 
-void	ft_fork(t_pipex *p, char **env)
+void	ft_fork(t_pipex *p, char **env, int *ret)
 {
 	int	pid1;
 	int	pid2;
-	int	status;
+	int	status1;
+	int	status2;
 
 	pid1 = fork();
 	if (pid1 == -1)
@@ -80,6 +78,8 @@ void	ft_fork(t_pipex *p, char **env)
 	close (p->fd[1]);
 	close (p->fd_in);
 	close (p->fd_out);
-	waitpid(pid1, &status, 0);
-	waitpid(pid2, &status, 0);
+	waitpid(pid1, &status1, 0);
+	waitpid(pid2, &status2, 0);
+	if (WIFEXITED(status2))
+		*ret = WEXITSTATUS(status2);
 }

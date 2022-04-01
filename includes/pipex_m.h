@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 21:15:41 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/31 19:13:16 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/01 18:45:23 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	free_split(char **str);
 void	free_init(t_pipex *p);
 void	ft_child(t_pipex *p, char **env);
 void	ft_parent(t_pipex *p, char **env);
-void	ft_fork(t_pipex *p, char **env);
+void	ft_fork(t_pipex *p, char **env, int *ret);
 
 #endif
