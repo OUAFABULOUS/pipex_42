@@ -6,7 +6,7 @@
 #    By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/02 20:16:19 by omoudni           #+#    #+#              #
-#    Updated: 2022/04/06 15:19:05 by omoudni          ###   ########.fr        #
+#    Updated: 2022/04/07 00:02:29 by omoudni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ define compiling
 	@echo "$(shell tput bold)$(shell tput setaf 2)√$(shell tput sgr0)"
 endef
 
-define finishing_m
+define finishing
 	@echo -n "$(shell tput bold)$(shell tput setaf 2)Creating executable $1 $(shell tput sgr0)"
-	@$(CC) $(CFLAGS) $(CPPFLAGS_M) $(OBJS_M) -o $1
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) -o $1
 	@echo "$(shell tput bold)$(shell tput setaf 2)√$(shell tput sgr0)"
 endef
 
@@ -34,44 +34,42 @@ define fcleaning
 	@echo "$(shell tput bold)$(shell tput setaf 2)√$(shell tput sgr0)"
 endef
 
-SRC_DIR_M = mandatory/SRC_M/
-OBJ_DIR_M = mandatory/bin_m/
-INC_DIR_M = mandatory/includes_m/
+SRC_DIR = src/
+OBJ_DIR = bin/
+INC_DIR = includes/
 
-SRCS_M = pipex.c \
-		 split.c \
-		 utils_1.c \
-		 utils_2.c \
-		 utils_3.c
+SRCS = pipex.c \
+	   split.c \
+	   utils_1.c \
+	   utils_2.c \
+	   gnl/get_next_line.c \
+	   gnl/get_next_line_utils.c\
+	   utils_3.c
 
-OBJS_M = $(addprefix $(OBJ_DIR_M), $(SRCS_M:%.c=%.o))
+OBJS = $(addprefix $(OBJ_DIR), $(SRCS:%.c=%.o))
 
 PIPEX = pipex
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address
+#CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address
+CFLAGS = -g -fsanitize=address
 
-DEBUG =
-ifdef DEBUG
-CFLAGS += -fsanitize=address
-endif
-
-CPPFLAGS_M = -I$(INC_DIR_M)
+CPPFLAGS = -I$(INC_DIR)
 
 all: $(PIPEX)
 
-$(PIPEX): $(OBJS_M)
-	$(call finishing_m, $(PIPEX))
+$(PIPEX): $(OBJS)
+	$(call finishing, $(PIPEX))
 
-$(OBJ_DIR_M)%.o: $(SRC_DIR_M)%.c | $(OBJ_DIR_M)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(call compiling, $@, $<)
 
-$(OBJ_DIR_M):
-	@mkdir -p $(OBJ_DIR_M)
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR) $(OBJ_DIR)/gnl/
 
 clean:
-	$(call cleaning, $(OBJ_DIR_M))
+	$(call cleaning, $(OBJ_DIR))
 
 fclean: clean
 	$(call fcleaning, $(PIPEX))
