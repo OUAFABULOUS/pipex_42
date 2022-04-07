@@ -6,7 +6,7 @@
 #    By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/02 20:16:19 by omoudni           #+#    #+#              #
-#    Updated: 2022/04/07 18:53:36 by omoudni          ###   ########.fr        #
+#    Updated: 2022/04/07 21:55:58 by omoudni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ endef
 
 define finishing_b
 	@echo -n "$(shell tput bold)$(shell tput setaf 2)Creating executable - bonus$1 $(shell tput sgr0)"
-	@$(CC) $(CFLAGS) $(CPPFLAGS_B) $(OBJS_M) -o $1
+	@$(CC) $(CFLAGS) $(CPPFLAGS_B) $(OBJS_B) -o $1
 	@echo "$(shell tput bold)$(shell tput setaf 2)√$(shell tput sgr0)"
 endef
 
@@ -80,7 +80,7 @@ CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address
 #DEBUG =
 #ifdef DEBUG
 #CFLAGS += -fsanitize=address
-#endif
+#endif/
 
 CPPFLAGS_M = -I$(INC_DIR_M)
 CPPFLAGS_B = -I$(INC_DIR_B)
@@ -88,19 +88,23 @@ CPPFLAGS_B = -I$(INC_DIR_B)
 all: $(PIPEX)
 
 $(PIPEX): $(OBJS_M)
+	@echo  $(OBJS_M)
 	$(call finishing_m, $(PIPEX))
-
-$(OBJ_DIR_M)%.o: $(SRC_DIR_M)%.c | $(OBJ_DIR_M)
-	$(call compiling, $@, $<)
 
 $(OBJ_DIR_M):
 	@mkdir -p $(OBJ_DIR_M)
 
-$(OBJ_DIR_B)%.o: $(SRC_DIR_B)%.c | $(OBJ_DIR_B)
-	$(call compiling_b, $@, $<)
+$(OBJ_DIR_M)%.o: $(SRC_DIR_M)%.c | $(OBJ_DIR_M)
+	$(call compiling_m, $@, $<)
+
 
 $(OBJ_DIR_B):
 	@mkdir -p $(OBJ_DIR_B)
+	$(eval FOLDERS = $(shell find $(SRC_DIR_B)/* -type d ))
+	@mkdir -p $(FOLDERS:$(SRC_DIR_B)%=$(OBJ_DIR_B)%)
+
+$(OBJ_DIR_B)%.o: $(SRC_DIR_B)%.c | $(OBJ_DIR_B)
+	$(call compiling_b, $@, $<)
 
 clean:
 	$(call cleaning, $(OBJ_DIR_M), $(OBJ_DIR_B))
@@ -110,8 +114,6 @@ fclean: clean
 
 bonus: $(OBJS_B)
 	$(call finishing_b, $(PIPEX))
-
-bonus: all
 
 re: fclean all
 
