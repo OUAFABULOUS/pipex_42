@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:18:13 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/07 00:08:31 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/07 13:46:46 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,6 @@ void	init(t_pipex *p, char **av, int ac, char **env)
 
 	i = 0;
 	p->cmd_num = ac - 3;
-	printf("Number of commands: %d\n", p->cmd_num);
 	p->fd = malloc((p->cmd_num -1) * sizeof(int *));
 	while (i < p->cmd_num - 1)
 	{
@@ -190,9 +189,7 @@ void	init(t_pipex *p, char **av, int ac, char **env)
 	i++;
 	}
 	get_cmdnargs(p, av, 0);
-//	triple_ptr_print(p->cmdnargs);
 	get_cmds(p);
-//	double_ptr_print(p->cmdn);
 	p->fd_in = open(av[1], O_RDONLY);
 	p->fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (p->fd_in < 0)
@@ -201,7 +198,6 @@ void	init(t_pipex *p, char **av, int ac, char **env)
 		handle_error("Error while opening the outfile.\n");
 	get_paths(p, env);
 	get_cmds_path(p);
-//	double_ptr_print(p->cmdn_path);
 }
 
 void	free_split(char **str)

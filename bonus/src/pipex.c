@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 22:04:04 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/06 23:46:37 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/07 13:44:56 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv, char **env)
 		else
 			init(&p, argv, argc, env);
 			ft_fork(&p, env);
-//		free_init(&p);
+			free_init(&p);
 	}
 	else
 		handle_error("Please respect the syntax!\n");

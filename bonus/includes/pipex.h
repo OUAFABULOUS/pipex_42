@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 21:15:41 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/07 00:00:32 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/07 14:09:21 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <stdio.h>
 #include <errno.h>
 #include <string.h>
 # define STDIN 0
