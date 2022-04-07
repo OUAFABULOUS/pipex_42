@@ -6,13 +6,12 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:18:13 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/07 13:46:46 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/07 15:36:05 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 #include <stdio.h>
-
 void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path)
 {
 	char	*full_path;
@@ -136,8 +135,14 @@ void	get_cmds(t_pipex *p)
 void	init_hd(t_pipex *p, char **av, int ac, char **env)
 {
 	int		i;
+	int		fd_tmp;
+	char	*ret;
+	int		count;
+	char	c;
+	int		pipe_test[2];
 
 	i = 0;
+	count = 0;
 	p->cmd_num = ac - 4;
 	printf("Number of commands: %d\n", p->cmd_num);
 	p->fd = malloc((p->cmd_num -1) * sizeof(int *));
@@ -152,6 +157,46 @@ void	init_hd(t_pipex *p, char **av, int ac, char **env)
 		}
 	i++;
 	}
+	p->fd_in = open(av[1], O_RDONLY);
+	p->fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (p->fd_in < 0)
+		handle_error("Error while opening the infile.\n");
+	if (p->fd_out < 0)
+		handle_error("Error while opening the outfile.\n");
+
+	get_cmdnargs(p, av, 1);
+	get_cmds(p);
+	get_paths(p, env);
+	get_cmds_path(p);
+	double_ptr_print(p->cmdn_path);
+
+	if (pipe(pipe_test) == -1)
+	{
+		printf("erreur ici : %s\n", strerror(errno));
+		exit(0);
+	}
+	write(1, "here doc:", 9);
+	ret = get_next_line(STDIN);
+	while (ret)
+	{
+		if (!ft_strncmp(ret, av[2], ft_strlen(av[2])))
+			break ;
+		write(pipe_test[1], ret, ft_strlen(ret));
+		write(1, "here doc:", 9);
+		free(ret);
+		ret = get_next_line(STDIN);
+	}
+	close(pipe_test[1]);
+	while (read(pipe_test[0], &c, 1))
+		count++;
+	printf("le nombre de caracteres dans ton fichier tmp est: %d\n", count);
+/*
+	int		i;
+
+	i = 0;
+	p->cmd_num = ac - 4;
+//	printf("Number of commands: %d\n", p->cmd_num);
+	p->fd = malloc((p->cmd_num -1) * sizeof(int *));
 	get_cmdnargs(p, av, 1);
 	triple_ptr_print(p->cmdnargs);
 	get_cmds(p);
@@ -165,9 +210,8 @@ void	init_hd(t_pipex *p, char **av, int ac, char **env)
 	if (p->fd_out < 0)
 		handle_error("Error while opening the outfile.\n");
 	get_paths(p, env);
-	get_cmds_path(p);
-	double_ptr_print(p->cmdn_path);
-}
+*/
+	}
 
 
 void	init(t_pipex *p, char **av, int ac, char **env)

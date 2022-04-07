@@ -6,13 +6,14 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 21:15:41 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/07 14:09:21 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/07 14:33:26 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
+# include "get_next_line.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -53,6 +54,5 @@ void	free_init(t_pipex *p);
 void	ft_child(t_pipex *p, char **env, int i);
 void	ft_fork(t_pipex *p, char **env);
 void	init_hd(t_pipex *p, char **av, int ac, char **env);
-
 
 #endif
