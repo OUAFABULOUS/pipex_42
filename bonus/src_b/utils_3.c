@@ -6,11 +6,11 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:19:14 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/07 16:09:43 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/07 18:58:28 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes_b/pipex_b.h"
 /*
 void	free_init(t_pipex *p)
 {

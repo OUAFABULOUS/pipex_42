@@ -6,11 +6,11 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 23:17:54 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/24 19:58:07 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/07 18:57:26 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes_b/pipex_b.h"
 
 static char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {

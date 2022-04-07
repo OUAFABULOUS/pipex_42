@@ -6,11 +6,10 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 22:45:28 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/31 10:18:26 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/07 18:56:15 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../../includes/get_next_line.h"
+#include "../../includes_b/get_next_line_b.h"
 
 int	get_index(char *str, char c)
 {

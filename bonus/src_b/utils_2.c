@@ -6,12 +6,12 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:18:13 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/07 17:02:26 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/07 19:00:54 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
-#include <stdio.h>
+#include "../includes_b/pipex_b.h"
+
 void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path)
 {
 	char	*full_path;
@@ -60,32 +60,6 @@ void	handle_error(char *str)
 	while (str[len])
 		len++;
 	write(1, str, len);
-}
-
-void	double_ptr_print(char **str)
-{
-	int	i;
-
-	i = 0;
-	printf("\n");
-	while(str[i])
-	{
-		printf("%s ", str[i]);
-		i++;
-	}
-	printf("\n");
-}
-
-void	triple_ptr_print(char ***str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		double_ptr_print(str[i]);
-		i++;
-	}
 }
 
 void	free_fds(t_pipex *p, int i)
@@ -140,7 +114,6 @@ void	init_hd(t_pipex *p, char **av, int ac, char **env)
 
 	i = 0;
 	p->cmd_num = ac - 4;
-	printf("Number of commands: %d\n", p->cmd_num);
 	p->fd = malloc((p->cmd_num -1) * sizeof(int *));
 	while (i < p->cmd_num -1)
 	{
@@ -181,46 +154,6 @@ void	init_hd(t_pipex *p, char **av, int ac, char **env)
 	}
 	get_paths(p, env);
 	get_cmds_path(p);
-
-//	p->fd_in = open(".tmpp", O_RDONLY);
-/*
-	close(pipe_test[1]);
-	else
-	{
-	while (read(pipe_test[0], &c, 1))
-	{
-	printf("%c", c);
-	write(p->fd_in, &c, 1);
-	}
-	write(p->fd_in, "\0", 1);
-	}
-	close(pipe_test[0]);
-	close(p->fd_in);
-	*/
-/*
-	printf("le nombre de caracteres dans ton fichier tmp est: %d\n", count);
-	*/
-/*
-	int		i;
-
-	i = 0;
-	p->cmd_num = ac - 4;
-//	printf("Number of commands: %d\n", p->cmd_num);
-	p->fd = malloc((p->cmd_num -1) * sizeof(int *));
-	get_cmdnargs(p, av, 1);
-	triple_ptr_print(p->cmdnargs);
-	get_cmds(p);
-	double_ptr_print(p->cmdn);
-	p->fd_in = open(av[1], O_RDWR | O_CREAT, 0644);
-	dup2(p->fd_in, STDIN);
-	close(p->fd_in);
-	p->fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (p->fd_in < 0)
-		handle_error("Error while opening the infile.\n");
-	if (p->fd_out < 0)
-		handle_error("Error while opening the outfile.\n");
-	get_paths(p, env);
-*/
 	}
 
 
