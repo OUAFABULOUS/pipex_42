@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:18:13 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/07 15:36:05 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/07 17:02:26 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,14 +135,10 @@ void	get_cmds(t_pipex *p)
 void	init_hd(t_pipex *p, char **av, int ac, char **env)
 {
 	int		i;
-	int		fd_tmp;
 	char	*ret;
-	int		count;
-	char	c;
-	int		pipe_test[2];
+	int		file;
 
 	i = 0;
-	count = 0;
 	p->cmd_num = ac - 4;
 	printf("Number of commands: %d\n", p->cmd_num);
 	p->fd = malloc((p->cmd_num -1) * sizeof(int *));
@@ -157,39 +153,53 @@ void	init_hd(t_pipex *p, char **av, int ac, char **env)
 		}
 	i++;
 	}
-	p->fd_in = open(av[1], O_RDONLY);
 	p->fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (p->fd_in < 0)
-		handle_error("Error while opening the infile.\n");
+	file = open (".heredoc_omo_tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (p->fd_out < 0)
 		handle_error("Error while opening the outfile.\n");
-
 	get_cmdnargs(p, av, 1);
 	get_cmds(p);
-	get_paths(p, env);
-	get_cmds_path(p);
-	double_ptr_print(p->cmdn_path);
-
-	if (pipe(pipe_test) == -1)
-	{
-		printf("erreur ici : %s\n", strerror(errno));
-		exit(0);
-	}
 	write(1, "here doc:", 9);
 	ret = get_next_line(STDIN);
 	while (ret)
 	{
 		if (!ft_strncmp(ret, av[2], ft_strlen(av[2])))
 			break ;
-		write(pipe_test[1], ret, ft_strlen(ret));
+		write(file, ret, ft_strlen(ret));
 		write(1, "here doc:", 9);
 		free(ret);
 		ret = get_next_line(STDIN);
 	}
+	if (ret)
+		free(ret);
+	close(file);
+	p->fd_in = open(".heredoc_omo_tmp", O_RDONLY);
+	if (p->fd_in < 0)
+	{
+		unlink(".heredoc_omo_tmp");
+		handle_error("Error while opening the temporary infile.\n");
+	}
+	get_paths(p, env);
+	get_cmds_path(p);
+
+//	p->fd_in = open(".tmpp", O_RDONLY);
+/*
 	close(pipe_test[1]);
+	else
+	{
 	while (read(pipe_test[0], &c, 1))
-		count++;
+	{
+	printf("%c", c);
+	write(p->fd_in, &c, 1);
+	}
+	write(p->fd_in, "\0", 1);
+	}
+	close(pipe_test[0]);
+	close(p->fd_in);
+	*/
+/*
 	printf("le nombre de caracteres dans ton fichier tmp est: %d\n", count);
+	*/
 /*
 	int		i;
 
