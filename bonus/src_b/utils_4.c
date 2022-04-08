@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 23:55:18 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/08 15:38:14 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/08 16:14:07 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	init_p1(t_pipex *p, char **av, int ac, char **env)
 	{
 		p->cmd_num = ac - 4;
 		get_cmdnargs(p, av, 1);
-		p->fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-		if (p->fd_out < 0)
-			handle_error("Error while opening the outfile.\n");
 	}
+	p->fd_out = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (p->fd_out < 0)
+		handle_error("Error while opening the outfile.\n");
 	get_cmds(p);
 	p->fd = malloc((p->cmd_num -1) * sizeof(int *));
 	while (++i < p->cmd_num -1)

@@ -5,16 +5,15 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 b_buff_to_line	gnl/get_next_line_utils.c	/^char	*b_buff_to_line(char **b_buff)$/;"	f
-double_ptr_print	utils_2.c	/^void	double_ptr_print(char **str)$/;"	f
+close_all_fds	utils_3.c	/^void	close_all_fds(t_pipex *p)$/;"	f
+fail	utils_3.c	/^void	fail(t_pipex *p, char c)$/;"	f
 free_fds	utils_2.c	/^void	free_fds(t_pipex *p, int i)$/;"	f
-free_init	utils_2.c	/^void	free_init(t_pipex *p)$/;"	f
-free_init	utils_3.c	/^void	free_init(t_pipex *p)$/;"	f
-free_split	utils_2.c	/^void	free_split(char **str)$/;"	f
+free_init	utils_5.c	/^void	free_init(t_pipex *p)$/;"	f
+free_split	utils_4.c	/^void	free_split(char **str)$/;"	f
 ft_char_in_charset	split.c	/^static int	ft_char_in_charset(char *str, char c)$/;"	f	file:
-ft_child	utils_3.c	/^void	ft_child(t_pipex *p, char **env)$/;"	f
+ft_child	utils_3.c	/^void	ft_child(t_pipex *p, char **env, int i)$/;"	f
 ft_concat	utils_1.c	/^char	*ft_concat(char *str1, char c, char *str2)$/;"	f
 ft_fork	utils_3.c	/^void	ft_fork(t_pipex *p, char **env)$/;"	f
-ft_parent	utils_3.c	/^void	ft_parent(t_pipex *p, char **env)$/;"	f
 ft_split	split.c	/^char	**ft_split(char *str, char *charset)$/;"	f
 ft_strdup	utils_1.c	/^char	*ft_strdup(char *str)$/;"	f
 ft_strjoin	gnl/get_next_line_utils.c	/^char	*ft_strjoin(char *str1, char *str2)$/;"	f
@@ -25,13 +24,14 @@ ft_strndup	gnl/get_next_line_utils.c	/^char	*ft_strndup(char *str, int len)$/;"	
 ft_word_count	split.c	/^static int	ft_word_count(char *str, char *charset)$/;"	f	file:
 get_cmd_path	utils_2.c	/^void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path)$/;"	f
 get_cmdnargs	utils_2.c	/^void	get_cmdnargs(t_pipex *p, char **av, int hd)$/;"	f
-get_cmds	utils_2.c	/^void	get_cmds(t_pipex *p)$/;"	f
+get_cmds	utils_4.c	/^void	get_cmds(t_pipex *p)$/;"	f
 get_cmds_path	utils_2.c	/^void	get_cmds_path(t_pipex *p)$/;"	f
 get_index	gnl/get_next_line_utils.c	/^int	get_index(char *str, char c)$/;"	f
 get_next_line	gnl/get_next_line.c	/^char	*get_next_line(int fd)$/;"	f
 get_paths	utils_1.c	/^void	get_paths(t_pipex *p, char **env)$/;"	f
 handle_error	utils_2.c	/^void	handle_error(char *str)$/;"	f
-init	utils_2.c	/^void	init(t_pipex *p, char **av, int ac, char **env)$/;"	f
-init_hd	utils_2.c	/^void	init_hd(t_pipex *p, char **av, int ac, char **env)$/;"	f
+handle_hd	utils_5.c	/^void	handle_hd(char **ret, char *limiter, int fd)$/;"	f
+init	utils_4.c	/^void	init(t_pipex *p, char **av, int ac, char **env)$/;"	f
+init_hd	utils_4.c	/^void	init_hd(t_pipex *p, char **av, int ac, char **env)$/;"	f
+init_p1	utils_4.c	/^void	init_p1(t_pipex *p, char **av, int ac, char **env)$/;"	f
 main	pipex.c	/^int	main(int argc, char **argv, char **env)$/;"	f
-triple_ptr_print	utils_2.c	/^void	triple_ptr_print(char ***str)$/;"	f

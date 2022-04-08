@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex_m.h"
+#include "../includes_m/pipex_m.h"
 
 void	fail(t_pipex *p, char c)
 {
