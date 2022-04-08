@@ -6,7 +6,7 @@
 #    By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/02 20:16:19 by omoudni           #+#    #+#              #
-#    Updated: 2022/04/07 21:55:58 by omoudni          ###   ########.fr        #
+#    Updated: 2022/04/08 15:47:37 by omoudni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ endef
 
 define cleaning 
 	@echo -n "$(shell tput bold)$(shell tput setaf 8)Cleaning $1 $(shell tput sgr0)"
-	@rm -rf $1 > /dev/null
+	@rm -rf $1 $2> /dev/null
 	@echo "$(shell tput bold)$(shell tput setaf 2)√$(shell tput sgr0)"
 endef
 
@@ -65,6 +65,8 @@ SRCS_B = pipex.c \
 		 utils_1.c \
 		 utils_2.c \
 		 utils_3.c \
+		 utils_4.c \
+		 utils_5.c \
 		 gnl/get_next_line.c \
 		 gnl/get_next_line_utils.c
 
@@ -110,7 +112,7 @@ clean:
 	$(call cleaning, $(OBJ_DIR_M), $(OBJ_DIR_B))
 
 fclean: clean
-	$(call fcleaning, $(PIPEX), $(BONUS))
+	$(call fcleaning, $(PIPEX))
 
 bonus: $(OBJS_B)
 	$(call finishing_b, $(PIPEX))

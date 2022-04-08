@@ -6,12 +6,12 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 21:15:41 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/07 18:59:37 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/08 15:40:18 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_B_H
+# define PIPEX_B_H
 
 # include "get_next_line_b.h"
 # include <sys/types.h>
@@ -21,14 +21,14 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-#include <errno.h>
-#include <string.h>
+# include <errno.h>
+# include <string.h>
 # define STDIN 0
 # define STDOUT 1
 # define BUFF 1024
 
 typedef struct s_pipex {
-	int		pipe_hd[2];
+	int		hd;
 	int		fd_in;
 	int		fd_out;
 	int		**fd;
@@ -54,5 +54,12 @@ void	free_init(t_pipex *p);
 void	ft_child(t_pipex *p, char **env, int i);
 void	ft_fork(t_pipex *p, char **env);
 void	init_hd(t_pipex *p, char **av, int ac, char **env);
+void	free_fds(t_pipex *p, int i);
+void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path);
+void	get_cmds_path(t_pipex *p);
+void	handle_error(char *str);
+void	get_cmdnargs(t_pipex *p, char **av, int hd);
+void	fail(t_pipex *p, char c);
+void	handle_hd(char **ret, char *limiter, int fd);
 
 #endif

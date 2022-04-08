@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_b.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 22:51:39 by omoudni           #+#    #+#             */
-/*   Updated: 2022/03/31 15:58:39 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/08 15:40:37 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_B_H
+# define GET_NEXT_LINE_B_H
 
 # include <unistd.h>
 # include <stdlib.h>
