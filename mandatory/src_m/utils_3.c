@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:19:14 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/01 18:45:21 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/10 06:50:41 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ void	free_init(t_pipex *p)
 	free_split(p->cmd1nargs);
 	free_split(p->cmd2nargs);
 	free_split(p->paths);
-	free(p->cmd1_path);
-	free(p->cmd2_path);
+	if (p->cmd1_path)
+		free(p->cmd1_path);
+	if (p->cmd2_path)
+		free(p->cmd2_path);
 }
 
 void	ft_child_1(t_pipex *p, char **env)

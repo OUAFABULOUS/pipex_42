@@ -1,0 +1,335 @@
+==251850== Memcheck, a memory error detector
+==251850== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==251850== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==251850== Command: ./pipex Makefile cat /usr/bin/grep\ int out_ttt
+==251850== Parent PID: 233043
+==251850== 
+==251850== Invalid read of size 1
+==251850==    at 0x109DD1: get_cmds_path (utils_2.c:88)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Address 0x4a59090 is 0 bytes inside a block of size 4 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A030: free_split (utils_2.c:142)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x1095F2: ft_split (split.c:90)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251850== Invalid read of size 1
+==251850==    at 0x109E47: handle_error (utils_2.c:102)
+==251850==    by 0x109DF3: get_cmds_path (utils_2.c:91)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Address 0x4a59090 is 0 bytes inside a block of size 4 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A030: free_split (utils_2.c:142)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x1095F2: ft_split (split.c:90)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251850== Syscall param write(buf) points to unaddressable byte(s)
+==251850==    at 0x49720A7: write (write.c:26)
+==251850==    by 0x109E64: handle_error (utils_2.c:104)
+==251850==    by 0x109DF3: get_cmds_path (utils_2.c:91)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Address 0x4a59090 is 0 bytes inside a block of size 4 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A030: free_split (utils_2.c:142)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x1095F2: ft_split (split.c:90)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251850== Invalid read of size 8
+==251850==    at 0x10A049: free_split (utils_2.c:140)
+==251850==    by 0x109E19: get_cmds_path (utils_2.c:93)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Address 0x4a59040 is 0 bytes inside a block of size 16 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A097: free_split (utils_2.c:147)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10953E: ft_split (split.c:82)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251850== Invalid read of size 8
+==251850==    at 0x10A026: free_split (utils_2.c:142)
+==251850==    by 0x109E19: get_cmds_path (utils_2.c:93)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Address 0x4a59040 is 0 bytes inside a block of size 16 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A097: free_split (utils_2.c:147)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10953E: ft_split (split.c:82)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251850== Invalid free() / delete / delete[] / realloc()
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A030: free_split (utils_2.c:142)
+==251850==    by 0x109E19: get_cmds_path (utils_2.c:93)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Address 0x4a59090 is 0 bytes inside a block of size 4 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A030: free_split (utils_2.c:142)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x1095F2: ft_split (split.c:90)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251850== Invalid read of size 8
+==251850==    at 0x10A065: free_split (utils_2.c:145)
+==251850==    by 0x109E19: get_cmds_path (utils_2.c:93)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Address 0x4a59048 is 8 bytes inside a block of size 16 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A097: free_split (utils_2.c:147)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10953E: ft_split (split.c:82)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251850== Invalid free() / delete / delete[] / realloc()
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A097: free_split (utils_2.c:147)
+==251850==    by 0x109E19: get_cmds_path (utils_2.c:93)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Address 0x4a59040 is 0 bytes inside a block of size 16 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A097: free_split (utils_2.c:147)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10953E: ft_split (split.c:82)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251852== Syscall param execve(filename) points to unaddressable byte(s)
+==251852==    at 0x49471AB: execve (syscall-template.S:78)
+==251852==    by 0x10A20F: ft_child_1 (utils_3.c:46)
+==251852==    by 0x10A312: ft_fork (utils_3.c:73)
+==251852==    by 0x109342: main (pipex.c:23)
+==251852==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==251852== 
+==251852== Syscall param execve(argv) points to unaddressable byte(s)
+==251852==    at 0x49471AB: execve (syscall-template.S:78)
+==251852==    by 0x10A20F: ft_child_1 (utils_3.c:46)
+==251852==    by 0x10A312: ft_fork (utils_3.c:73)
+==251852==    by 0x109342: main (pipex.c:23)
+==251852==  Address 0x4a59040 is 0 bytes inside a block of size 16 free'd
+==251852==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251852==    by 0x10A097: free_split (utils_2.c:147)
+==251852==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251852==    by 0x109FEA: init (utils_2.c:130)
+==251852==    by 0x10932B: main (pipex.c:22)
+==251852==  Block was alloc'd at
+==251852==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251852==    by 0x10953E: ft_split (split.c:82)
+==251852==    by 0x109EE8: init (utils_2.c:117)
+==251852==    by 0x10932B: main (pipex.c:22)
+==251852== 
+==251852== Syscall param execve(argv[i]) points to unaddressable byte(s)
+==251852==    at 0x49471AB: execve (syscall-template.S:78)
+==251852==    by 0x10A20F: ft_child_1 (utils_3.c:46)
+==251852==    by 0x10A312: ft_fork (utils_3.c:73)
+==251852==    by 0x109342: main (pipex.c:23)
+==251852==  Address 0x4a59090 is 0 bytes inside a block of size 4 free'd
+==251852==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251852==    by 0x10A030: free_split (utils_2.c:142)
+==251852==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251852==    by 0x109FEA: init (utils_2.c:130)
+==251852==    by 0x10932B: main (pipex.c:22)
+==251852==  Block was alloc'd at
+==251852==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251852==    by 0x1095F2: ft_split (split.c:90)
+==251852==    by 0x109EE8: init (utils_2.c:117)
+==251852==    by 0x10932B: main (pipex.c:22)
+==251852== 
+==251853== Syscall param execve(filename) points to unaddressable byte(s)
+==251853==    at 0x49471AB: execve (syscall-template.S:78)
+==251853==    by 0x10A2A9: ft_child_2 (utils_3.c:58)
+==251853==    by 0x10A34A: ft_fork (utils_3.c:78)
+==251853==    by 0x109342: main (pipex.c:23)
+==251853==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==251853== 
+==251852== 
+==251852== HEAP SUMMARY:
+==251852==     in use at exit: 42 bytes in 3 blocks
+==251852==   total heap usage: 5 allocs, 4 frees, 62 bytes allocated
+==251852== 
+==251852== 18 bytes in 2 blocks are still reachable in loss record 1 of 2
+==251852==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251852==    by 0x1095F2: ft_split (split.c:90)
+==251852==    by 0x109F0A: init (utils_2.c:118)
+==251852==    by 0x10932B: main (pipex.c:22)
+==251852== 
+==251852== 24 bytes in 1 blocks are still reachable in loss record 2 of 2
+==251852==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251852==    by 0x10953E: ft_split (split.c:82)
+==251852==    by 0x109F0A: init (utils_2.c:118)
+==251852==    by 0x10932B: main (pipex.c:22)
+==251852== 
+==251852== LEAK SUMMARY:
+==251852==    definitely lost: 0 bytes in 0 blocks
+==251852==    indirectly lost: 0 bytes in 0 blocks
+==251852==      possibly lost: 0 bytes in 0 blocks
+==251852==    still reachable: 42 bytes in 3 blocks
+==251852==         suppressed: 0 bytes in 0 blocks
+==251852== 
+==251852== For lists of detected and suppressed errors, rerun with: -s
+==251852== ERROR SUMMARY: 16 errors from 11 contexts (suppressed: 0 from 0)
+==251853== 
+==251853== HEAP SUMMARY:
+==251853==     in use at exit: 42 bytes in 3 blocks
+==251853==   total heap usage: 5 allocs, 4 frees, 62 bytes allocated
+==251853== 
+==251853== 18 bytes in 2 blocks are still reachable in loss record 1 of 2
+==251853==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251853==    by 0x1095F2: ft_split (split.c:90)
+==251853==    by 0x109F0A: init (utils_2.c:118)
+==251853==    by 0x10932B: main (pipex.c:22)
+==251853== 
+==251853== 24 bytes in 1 blocks are still reachable in loss record 2 of 2
+==251853==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251853==    by 0x10953E: ft_split (split.c:82)
+==251853==    by 0x109F0A: init (utils_2.c:118)
+==251853==    by 0x10932B: main (pipex.c:22)
+==251853== 
+==251853== LEAK SUMMARY:
+==251853==    definitely lost: 0 bytes in 0 blocks
+==251853==    indirectly lost: 0 bytes in 0 blocks
+==251853==      possibly lost: 0 bytes in 0 blocks
+==251853==    still reachable: 42 bytes in 3 blocks
+==251853==         suppressed: 0 bytes in 0 blocks
+==251853== 
+==251853== For lists of detected and suppressed errors, rerun with: -s
+==251853== ERROR SUMMARY: 13 errors from 9 contexts (suppressed: 0 from 0)
+==251850== Invalid read of size 8
+==251850==    at 0x10A049: free_split (utils_2.c:140)
+==251850==    by 0x10A123: free_init (utils_3.c:29)
+==251850==    by 0x10934E: main (pipex.c:24)
+==251850==  Address 0x4a59040 is 0 bytes inside a block of size 16 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A097: free_split (utils_2.c:147)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10953E: ft_split (split.c:82)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251850== Invalid read of size 8
+==251850==    at 0x10A026: free_split (utils_2.c:142)
+==251850==    by 0x10A123: free_init (utils_3.c:29)
+==251850==    by 0x10934E: main (pipex.c:24)
+==251850==  Address 0x4a59040 is 0 bytes inside a block of size 16 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A097: free_split (utils_2.c:147)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10953E: ft_split (split.c:82)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251850== Invalid free() / delete / delete[] / realloc()
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A030: free_split (utils_2.c:142)
+==251850==    by 0x10A123: free_init (utils_3.c:29)
+==251850==    by 0x10934E: main (pipex.c:24)
+==251850==  Address 0x4a59090 is 0 bytes inside a block of size 4 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A030: free_split (utils_2.c:142)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x1095F2: ft_split (split.c:90)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251850== Invalid read of size 8
+==251850==    at 0x10A065: free_split (utils_2.c:145)
+==251850==    by 0x10A123: free_init (utils_3.c:29)
+==251850==    by 0x10934E: main (pipex.c:24)
+==251850==  Address 0x4a59048 is 8 bytes inside a block of size 16 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A097: free_split (utils_2.c:147)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10953E: ft_split (split.c:82)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251850== Invalid free() / delete / delete[] / realloc()
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A097: free_split (utils_2.c:147)
+==251850==    by 0x10A123: free_init (utils_3.c:29)
+==251850==    by 0x10934E: main (pipex.c:24)
+==251850==  Address 0x4a59040 is 0 bytes inside a block of size 16 free'd
+==251850==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10A097: free_split (utils_2.c:147)
+==251850==    by 0x109D04: get_cmds_path (utils_2.c:76)
+==251850==    by 0x109FEA: init (utils_2.c:130)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850==  Block was alloc'd at
+==251850==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==251850==    by 0x10953E: ft_split (split.c:82)
+==251850==    by 0x109EE8: init (utils_2.c:117)
+==251850==    by 0x10932B: main (pipex.c:22)
+==251850== 
+==251850== 
+==251850== HEAP SUMMARY:
+==251850==     in use at exit: 0 bytes in 0 blocks
+==251850==   total heap usage: 5 allocs, 9 frees, 62 bytes allocated
+==251850== 
+==251850== All heap blocks were freed -- no leaks are possible
+==251850== 
+==251850== For lists of detected and suppressed errors, rerun with: -s
+==251850== ERROR SUMMARY: 18 errors from 13 contexts (suppressed: 0 from 0)

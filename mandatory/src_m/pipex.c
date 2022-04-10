@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 22:04:04 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/08 16:29:36 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/10 07:31:11 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	main(int argc, char **argv, char **env)
 	if (argc == 5)
 	{
 		init(&p, argv, env);
-		ft_fork(&p, env, &ret);
+		if ((&p)->cmd1nargs && (&p)->cmd2nargs)
+		{
+			ft_fork(&p, env, &ret);
+		}	
 		free_init(&p);
 	}
 	else
