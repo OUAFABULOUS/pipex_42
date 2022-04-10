@@ -6,32 +6,74 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:18:13 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/08 15:14:18 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/10 19:11:35 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_b/pipex_b.h"
 
-void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path)
+void	no_path(t_pipex *p, char *cmd, char **cmd_path, char **full_path)
+{
+	if (cmd[0] && (cmd[0] == '.' || cmd[0] == '/'))
+	{
+		*full_path = ft_strdup(cmd);
+		if (!access(*full_path, F_OK))
+		{
+			*cmd_path = *full_path;
+			return ;
+		}
+		free(full_path);
+	}
+	p->err_cmd_nf = 1;
+	handle_error("Pipex: command not found: ");
+	handle_error(cmd);
+	write(1, "\n", 1);
+
+}
+
+void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path, int i)
 {
 	char	*full_path;
-	int		i;
+	int		j;
 
-	i = 0;
+	p->rep_1_exe = 0;
+	p->rep_n_exe = 0;
+	p->err_null_cmd = 0;
+	p->err_cmd_nf = 0;
+	j = 0;
 	*cmd_path = NULL;
-	while ((p->paths)[i])
+	if (cmd && !p->paths)
+		no_path(p, cmd, cmd_path, &full_path);
+	while (cmd && p->paths && (p->paths)[j])
 	{
-		if (cmd[0] == '.' || cmd[0] == '/')
+		if (cmd[0] && (cmd[0] == '.' || cmd[0] == '/'))
 			full_path = ft_strdup(cmd);
 		else
-			full_path = ft_concat((p->paths)[i], '/', cmd);
+			full_path = ft_concat((p->paths)[j], '/', cmd);
 		if (!access(full_path, F_OK))
 		{
 			*cmd_path = full_path;
 			return ;
 		}
 		free(full_path);
-		i++;
+		j++;
+	}
+	if (cmd)
+		p->err_cmd_nf = 1;
+	if (!cmd)
+	{
+		if (i != 0 && i != p->cmd_num -1) 
+			p->err_null_cmd = 1;
+		if (i == 0)
+		{
+			p->rep_1_exe = 1;
+			return ;
+		}
+		if (n == p->cmd_num -1)
+		{
+			p->rep_n_exe = 1;
+			return ;
+		}
 	}
 	handle_error("Pipex: command not found: ");
 	handle_error(cmd);
@@ -46,7 +88,7 @@ void	get_cmds_path(t_pipex *p)
 	p->cmdn_path = malloc((p->cmd_num + 1) * sizeof(char *));
 	while (i < p->cmd_num)
 	{
-		get_cmd_path(p, (p->cmdn)[i], &((p->cmdn_path)[i]));
+		get_cmd_path(p, (p->cmdn)[i], &((p->cmdn_path)[i]), i);
 		i++;
 	}
 	(p->cmdn_path)[i] = NULL;

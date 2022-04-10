@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:16:15 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/07 18:57:45 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/10 18:15:32 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ void	get_paths(t_pipex *p, char **env)
 	int		i;
 	char	*path;
 
+	p->paths = NULL;
 	i = 0;
 	path = NULL;
-	while ((env)[i])
+	while (env && *env && (env)[i])
 	{
 		if (!ft_strncmp((env)[i], "PATH=", 5))
 		{

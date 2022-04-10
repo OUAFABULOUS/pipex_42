@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:19:14 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/08 15:38:10 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/10 19:43:56 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void	close_all_fds(t_pipex *p)
 
 void	ft_child(t_pipex *p, char **env, int i)
 {
+	char	cat_1[8];
+	char	cat_2[1];
+	char	*cat[2];
+
+	cat_1 = "/bin/cat";
 	if (i != 0)
 		dup2(p->fd[i - 1][0], STDIN);
 	if (!i)
@@ -50,7 +55,10 @@ void	ft_child(t_pipex *p, char **env, int i)
 	if (i == p->cmd_num - 1)
 		dup2(p->fd_out, STDOUT);
 	close_all_fds(p);
-	execve(p->cmdn_path[i], p->cmdnargs[i], env);
+	if ((!i && p->rep_1_exe) || (i == p->cmd_num - 1 && p->rep_n_exe))
+		execve(, p->cmdnargs[i], env);
+	else
+		execve(p->cmdn_path[i], p->cmdnargs[i], env);
 	exit(0);
 }
 

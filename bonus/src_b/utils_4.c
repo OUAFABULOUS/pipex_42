@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 23:55:18 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/08 16:14:07 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/10 19:15:03 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	get_cmds(t_pipex *p)
 	p->cmdn = malloc((p->cmd_num + 1) * sizeof(char *));
 	while (i < p->cmd_num)
 	{
-		(p->cmdn)[i] = ft_strdup((p->cmdnargs)[i][0]);
+		if (!*((p->cmdnargs)[i]))
+			(p->cmdn)[i] = NULL;
+		else
+			(p->cmdn)[i] = ft_strdup((p->cmdnargs)[i][0]);
 		i++;
 	}
 	(p->cmdn)[i] = NULL;
@@ -30,6 +33,7 @@ void	init_p1(t_pipex *p, char **av, int ac, char **env)
 {
 	int	i;
 
+	p->paths = NULL;
 	i = -1;
 	if (p->hd)
 	{
@@ -67,6 +71,25 @@ void	init_hd(t_pipex *p, char **av, int ac, char **env)
 		unlink(".heredoc_omo_tmp");
 		handle_error("Error while opening the temporary infile.\n");
 	}
+}
+
+void	init_0(t_pipex *p)
+{
+	int	i;
+
+	i = 0;
+		p->cmdnargs = malloc((p->cmd_num + 1) * sizeof(char *));
+		p->cmdn = ;
+		p->cmdn_path[i] = NULL;
+	while (i < p->cmd_num)
+	{
+		p->cmdnargs[i] = NULL;
+		p->cmdn[i] = NULL;
+		p->cmdn_path[i] = NULL;
+		i++;
+	}
+	p->fd = NULL;
+	p->paths = NULL;
 }
 
 void	init(t_pipex *p, char **av, int ac, char **env)
