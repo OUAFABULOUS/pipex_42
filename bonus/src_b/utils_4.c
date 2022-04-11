@@ -6,11 +6,12 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 23:55:18 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/10 19:15:03 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/11 18:02:12 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_b/pipex_b.h"
+#include <stdio.h>
 
 void	get_cmds(t_pipex *p)
 {
@@ -79,7 +80,7 @@ void	init_0(t_pipex *p)
 
 	i = 0;
 		p->cmdnargs = malloc((p->cmd_num + 1) * sizeof(char *));
-		p->cmdn = ;
+		p->cmdn = NULL;
 		p->cmdn_path[i] = NULL;
 	while (i < p->cmd_num)
 	{
@@ -101,6 +102,14 @@ void	init(t_pipex *p, char **av, int ac, char **env)
 	p->fd_in = open(av[1], O_RDONLY);
 	if (p->fd_in < 0)
 		handle_error("Error while opening the infile.\n");
+//	int	i;
+//	i = 0;
+//	printf("%d\n",p->cmd_num);
+//	while (i < p->cmd_num)
+//	{
+//		printf("%s\n", p->cmdnargs[i][0]);
+//		i++;
+//	}
 }
 
 void	free_split(char **str)

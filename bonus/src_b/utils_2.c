@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:18:13 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/10 19:11:35 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/11 18:01:19 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path, int i)
 			p->rep_1_exe = 1;
 			return ;
 		}
-		if (n == p->cmd_num -1)
+		if (i == p->cmd_num -1)
 		{
 			p->rep_n_exe = 1;
 			return ;
@@ -99,7 +99,7 @@ void	handle_error(char *str)
 	int	len;
 
 	len = 0;
-	while (str[len])
+	while (str && str[len])
 		len++;
 	write(1, str, len);
 }
@@ -117,6 +117,25 @@ void	free_fds(t_pipex *p, int i)
 	free(p->fd);
 }
 
+void	fill_with_cat(char *str, t_pipex *p, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < 12)
+	{
+		if (!n)
+			(p->cmdnargs)[0][0][i] = str[i];
+		if (n)
+			(p->cmdnargs)[p->cmd_num - 1][0][i] = str[i];
+		i++;
+	}
+		if (!n)
+			(p->cmdnargs)[0][0][i] = '\0';
+		if (n)
+			(p->cmdnargs)[p->cmd_num - 1][0][i] = '\0';
+}
+
 void	get_cmdnargs(t_pipex *p, char **av, int hd)
 {
 	int	i;
@@ -130,6 +149,26 @@ void	get_cmdnargs(t_pipex *p, char **av, int hd)
 		else
 			(p->cmdnargs)[i] = ft_split(av[2 + i], " ");
 		i++;
+	}
+	if (!(*((p->cmdnargs)[0])) || !(*((p->cmdnargs)[p->cmd_num - 1])))
+	{
+		if (!(*((p->cmdnargs)[0])))
+		{
+			free((p->cmdnargs)[0]);
+			p->cmdnargs[0] = malloc (1 * sizeof(char *));
+			p->cmdnargs[0][0] = malloc(13);
+			fill_with_cat("/usr/bin/cat", p, 0);
+		}
+		if (!(*((p->cmdnargs)[p->cmd_num - 1])))
+		{
+			free(*((p->cmdnargs)[p->cmd_num - 1]));
+			free((p->cmdnargs)[p->cmd_num - 1]);
+			p->cmdnargs[p->cmd_num - 1] = malloc (2 * sizeof(char *));
+			p->cmdnargs[p->cmd_num - 1][0] = malloc(13);
+			p->cmdnargs[p->cmd_num - 1][1] = malloc(1);
+			p->cmdnargs[p->cmd_num - 1][1] = NULL;
+			fill_with_cat("/usr/bin/cat", p, 1);
+		}
 	}
 	p->cmdnargs[i] = NULL;
 }

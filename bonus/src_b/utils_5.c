@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 15:24:49 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/10 07:11:07 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/11 17:47:24 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_init(t_pipex *p)
 	int	i;
 
 	i = 0;
-	while (i < p->cmd_num + 1)
+	while (i < p->cmd_num)
 	{
 		free_split((p->cmdnargs)[i]);
 		free((p->cmdn_path)[i]);
