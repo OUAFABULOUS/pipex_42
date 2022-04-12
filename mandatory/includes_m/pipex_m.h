@@ -6,12 +6,12 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 21:15:41 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/10 07:29:52 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/12 15:49:03 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_M_H
-# define PIPEX_M_H
+#ifndef PIPEX_B_H
+# define PIPEX_B_H
 
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -20,22 +20,24 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <stdio.h>
-
+# include <errno.h>
+# include <string.h>
 # define STDIN 0
 # define STDOUT 1
+# define BUFF 1024
 
 typedef struct s_pipex {
+	int		hd;
 	int		fd_in;
 	int		fd_out;
-	int		fd[2];
-	char	**cmd1nargs;
-	char	**cmd2nargs;
-	char	*cmd1;
-	char	*cmd2;
+	int		**fd;
+	int		cmd_num;
+	char	***cmdnargs;
+	char	**cmdn;
 	char	**paths;
-	char	*cmd1_path;
-	char	*cmd2_path;
+	char	**cmdn_path;
+	int		err_null_cmd[1];
+	int		err_cmd_nf[1];
 }				t_pipex;
 
 char	**ft_split(char *str, char *charset);
@@ -44,14 +46,19 @@ char	*ft_strdup(char *str);
 int		ft_strncmp(char *str1, char *str2, int n);
 void	get_paths(t_pipex *p, char **env);
 char	*ft_concat(char *str1, char c, char *str2);
+void	init(t_pipex *p, char **av, int ac, char **env);
+void	free_split(char **str);
+void	free_init(t_pipex *p);
+void	ft_child(t_pipex *p, char **env, int i);
+void	ft_fork(t_pipex *p, char **env);
+void	free_fds(t_pipex *p, int i);
 void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path);
 void	get_cmds_path(t_pipex *p);
 void	handle_error(char *str);
-void	init(t_pipex *p, char **av, char **env);
-void	free_split(char **str);
-void	free_init(t_pipex *p);
-void	ft_child(t_pipex *p, char **env);
-void	ft_parent(t_pipex *p, char **env);
-void	ft_fork(t_pipex *p, char **env, int *ret);
+void	get_cmdnargs(t_pipex *p, char **av, int hd);
+void	fail(t_pipex *p, char c);
+void	handle_error(char *str);
+void	free_fds(t_pipex *p, int i);
+void	get_cmdnargs(t_pipex *p, char **av, int hd);
 
 #endif

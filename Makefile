@@ -6,7 +6,7 @@
 #    By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/02 20:16:19 by omoudni           #+#    #+#              #
-#    Updated: 2022/04/10 04:26:16 by omoudni          ###   ########.fr        #
+#    Updated: 2022/04/12 15:48:12 by omoudni          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,9 @@ SRCS_M = pipex.c \
 		 split.c \
 		 utils_1.c \
 		 utils_2.c \
-		 utils_3.c
+		 utils_3.c \
+		 utils_4.c \
+		 utils_5.c
 
 SRCS_B = pipex.c \
 		 split.c \

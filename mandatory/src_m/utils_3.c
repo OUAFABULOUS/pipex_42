@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:19:14 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/10 06:50:41 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/12 14:26:26 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,64 +24,69 @@ void	fail(t_pipex *p, char c)
 	exit(0);
 }
 
-void	free_init(t_pipex *p)
+void	close_all_fds(t_pipex *p)
 {
-	free_split(p->cmd1nargs);
-	free_split(p->cmd2nargs);
-	free_split(p->paths);
-	if (p->cmd1_path)
-		free(p->cmd1_path);
-	if (p->cmd2_path)
-		free(p->cmd2_path);
-}
+	int	i;
 
-void	ft_child_1(t_pipex *p, char **env)
-{
-	close(p->fd[0]);
-	dup2(p->fd[1], STDOUT);
-	close(p->fd[1]);
-	dup2(p->fd_in, STDIN);
+	i = 0;
 	close(p->fd_in);
 	close(p->fd_out);
-	execve(p->cmd1_path, p->cmd1nargs, env);
+	while (i < p->cmd_num - 1)
+	{
+		close(p->fd[i][0]);
+		close(p->fd[i][1]);
+		i++;
+	}
+}
+
+void	ft_child(t_pipex *p, char **env, int i)
+{
+	if (i != 0)
+		dup2(p->fd[i - 1][0], STDIN);
+	if (!i)
+		dup2(p->fd_in, STDIN);
+	if (i != p->cmd_num - 1)
+		dup2(p->fd[i][1], STDOUT);
+	if (i == p->cmd_num - 1)
+		dup2(p->fd_out, STDOUT);
+	close_all_fds(p);
+	execve(p->cmdn_path[i], p->cmdnargs[i], env);
 	exit(0);
 }
 
-void	ft_child_2(t_pipex *p, char **env)
+void	ft_fork(t_pipex *p, char **env)
 {
-	close(p->fd_in);
-	close(p->fd[1]);
-	dup2(p->fd[0], STDIN);
-	close(p->fd[0]);
-	dup2(p->fd_out, STDOUT);
-	close(p->fd_out);
-	execve(p->cmd2_path, p->cmd2nargs, env);
-	exit(0);
+	int	*pid;
+	int	i;
+	int	status;
+
+	pid = malloc((p->cmd_num) * sizeof(int));
+	i = 0;
+	while (i < p->cmd_num)
+	{
+		pid[i] = fork();
+		if (pid[i] == -1)
+			fail(p, 'f');
+		if (!pid[i])
+			ft_child(p, env, i);
+		i++;
+	}
+	close_all_fds(p);
+	while (i < p->cmd_num)
+	{
+		waitpid(pid[i], &status, 0);
+		i++;
+	}
+	if (pid)
+		free (pid);
 }
 
-void	ft_fork(t_pipex *p, char **env, int *ret)
+void	handle_error(char *str)
 {
-	int	pid1;
-	int	pid2;
-	int	status1;
-	int	status2;
+	int	len;
 
-	pid1 = fork();
-	if (pid1 == -1)
-		fail(p, 'p');
-	if (pid1 == 0)
-		ft_child_1(p, env);
-	pid2 = fork();
-	if (pid2 == -1)
-		fail(p, 'p');
-	if (pid2 == 0)
-		ft_child_2(p, env);
-	close (p->fd[0]);
-	close (p->fd[1]);
-	close (p->fd_in);
-	close (p->fd_out);
-	waitpid(pid1, &status1, 0);
-	waitpid(pid2, &status2, 0);
-	if (WIFEXITED(status2))
-		*ret = WEXITSTATUS(status2);
+	len = 0;
+	while (str && str[len])
+		len++;
+	write(1, str, len);
 }
