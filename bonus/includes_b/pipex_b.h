@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 21:15:41 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/11 17:06:28 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/12 02:19:01 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_pipex {
 	char	**cmdn;
 	char	**paths;
 	char	**cmdn_path;
-	int		err_null_cmd;
+	int		err_null_cmd[1];
 	int		err_cmd_nf;
 	int		rep_1_exe;
 	int		rep_n_exe;

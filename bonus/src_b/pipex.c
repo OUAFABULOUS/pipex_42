@@ -6,12 +6,12 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 22:04:04 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/11 17:37:32 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/12 02:21:18 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_b/pipex_b.h"
-
+#include <stdio.h>
 int	main(int argc, char **argv, char **env)
 {
 	t_pipex	p;
@@ -23,8 +23,12 @@ int	main(int argc, char **argv, char **env)
 			init_hd(&p, argv, argc, env);
 		else
 			init(&p, argv, argc, env);
-		if (!(&p)->err_null_cmd && !(&p)->err_null_cmd)
+		printf("%d\n", *(&p)->err_null_cmd);
+		if (!(&p)->err_null_cmd && !(&p)->err_cmd_nf)
+		{
+			printf("Oups entered here while I shouldn't have\n");
 			ft_fork(&p, env);
+		}
 		free_init(&p);
 	}
 	else
