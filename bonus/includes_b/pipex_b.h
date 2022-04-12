@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 21:15:41 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/12 02:19:01 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/12 15:30:18 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ typedef struct s_pipex {
 	char	**paths;
 	char	**cmdn_path;
 	int		err_null_cmd[1];
-	int		err_cmd_nf;
-	int		rep_1_exe;
-	int		rep_n_exe;
+	int		err_cmd_nf[1];
 }				t_pipex;
 
 char	**ft_split(char *str, char *charset);
@@ -56,11 +54,14 @@ void	ft_child(t_pipex *p, char **env, int i);
 void	ft_fork(t_pipex *p, char **env);
 void	init_hd(t_pipex *p, char **av, int ac, char **env);
 void	free_fds(t_pipex *p, int i);
-void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path, int i);
+void	get_cmd_path(t_pipex *p, char *cmd, char **cmd_path);
 void	get_cmds_path(t_pipex *p);
 void	handle_error(char *str);
 void	get_cmdnargs(t_pipex *p, char **av, int hd);
 void	fail(t_pipex *p, char c);
 void	handle_hd(char **ret, char *limiter, int fd);
+void	handle_error(char *str);
+void	free_fds(t_pipex *p, int i);
+void	get_cmdnargs(t_pipex *p, char **av, int hd);
 
 #endif

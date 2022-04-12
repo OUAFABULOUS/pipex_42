@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:19:14 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/11 18:02:08 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/12 14:26:26 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ void	ft_child(t_pipex *p, char **env, int i)
 	if (i == p->cmd_num - 1)
 		dup2(p->fd_out, STDOUT);
 	close_all_fds(p);
-//	if ((!i && p->rep_1_exe) || (i == p->cmd_num - 1 && p->rep_n_exe))
-//		execve(cat_1, cat, env);
-//	else
-		execve(p->cmdn_path[i], p->cmdnargs[i], env);
+	execve(p->cmdn_path[i], p->cmdnargs[i], env);
 	exit(0);
 }
 
@@ -82,4 +79,14 @@ void	ft_fork(t_pipex *p, char **env)
 	}
 	if (pid)
 		free (pid);
+}
+
+void	handle_error(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str && str[len])
+		len++;
+	write(1, str, len);
 }

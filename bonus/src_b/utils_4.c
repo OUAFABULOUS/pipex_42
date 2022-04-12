@@ -6,12 +6,11 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 23:55:18 by omoudni           #+#    #+#             */
-/*   Updated: 2022/04/12 02:55:08 by omoudni          ###   ########.fr       */
+/*   Updated: 2022/04/12 15:22:48 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_b/pipex_b.h"
-#include <stdio.h>
 
 void	get_cmds(t_pipex *p)
 {
@@ -34,6 +33,8 @@ void	init_p1(t_pipex *p, char **av, int ac, char **env)
 {
 	int	i;
 
+	*(p->err_null_cmd) = 0;
+	*(p->err_cmd_nf) = 0;
 	p->paths = NULL;
 	i = -1;
 	if (p->hd)
@@ -102,30 +103,4 @@ void	init(t_pipex *p, char **av, int ac, char **env)
 	p->fd_in = open(av[1], O_RDONLY);
 	if (p->fd_in < 0)
 		handle_error("Error while opening the infile.\n");
-//	int	i;
-//	i = 0;
-//	printf("%d\n",p->cmd_num);
-//	while (i < p->cmd_num)
-//	{
-//		printf("%s\n", p->cmdnargs[i][0]);
-//		i++;
-//	}
-}
-
-void	free_split(char **str)
-{
-	int	i;
-
-	i = 0;
-	if (str)
-	{
-		while (str[i])
-		{	
-			free(str[i]);
-			i++;
-		}
-		free(str[i]);
-		free(str);
-	}
-	str = NULL;
 }
